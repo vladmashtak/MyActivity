@@ -1,13 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http'
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
+
+import { AuthGuardService } from './services/auth-guard.service';
+import { AuthenticationService } from './services/authentication.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { AuthPageComponent } from './auth-page/auth-page.component';
+import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { NewAccountPageComponent } from './new-account-page/new-account-page.component';
 
 // Initialize Firebase
 const configFirebae = {
@@ -23,16 +30,23 @@ const configFirebae = {
   declarations: [
     AppComponent,
     NavBarComponent,
-    AuthPageComponent,
-    MainPageComponent
+    SignInPageComponent,
+    MainPageComponent,
+    NewAccountPageComponent
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     AppRoutingModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(configFirebae)
   ],
-  providers: [],
+  providers: [
+    AngularFireAuth,
+    AngularFireDatabase,
+    AuthenticationService,
+    AuthGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

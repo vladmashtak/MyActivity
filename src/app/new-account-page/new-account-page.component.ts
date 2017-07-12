@@ -1,21 +1,28 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
-  selector: 'auth-page',
-  templateUrl: './auth-page.component.html',
-  styleUrls: ['./auth-page.component.scss']
+  selector: 'new-account-page',
+  templateUrl: './new-account-page.component.html',
+  styleUrls: ['./new-account-page.component.scss']
 })
+export class NewAccountPageComponent {
+  public userForm: FormGroup;
 
-export class AuthPageComponent {
-  public signInForm: FormGroup;
+  constructor(public authentication: AuthenticationService,
+              private _fb: FormBuilder) {
+    this.userForm = this._createForm(_fb);
+  }
 
-  constructor(private _fb: FormBuilder) {
-    this.signInForm = this._createForm(_fb);
+  public createNewAccount(): void {
+    this.authentication.createUser(this.userForm);
   }
 
   private _createForm(fb: FormBuilder): FormGroup {
     return fb.group({
+      name: ['', Validators.compose([Validators.required, Validators.min(3)])],
+      surname: ['', Validators.compose([Validators.required, Validators.min(3)])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.min(3)])],
       repeatPassword: ['', Validators.compose([Validators.required, Validators.min(3)])]

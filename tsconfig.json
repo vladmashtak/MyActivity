@@ -14,6 +14,7 @@
     ],
     "types": [
       "firebase",
+      "angularfire2",
       "jasminewd2"
     ],
     "lib": [

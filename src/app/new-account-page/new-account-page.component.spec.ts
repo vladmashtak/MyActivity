@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthPageComponent } from './auth-page.component';
+import { NewAccountPageComponent } from './new-account-page.component';
 
-describe('AuthPageComponent', () => {
-  let component: AuthPageComponent;
-  let fixture: ComponentFixture<AuthPageComponent>;
+describe('NewAccountPageComponent', () => {
+  let component: NewAccountPageComponent;
+  let fixture: ComponentFixture<NewAccountPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AuthPageComponent ]
+      declarations: [ NewAccountPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AuthPageComponent);
+    fixture = TestBed.createComponent(NewAccountPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
