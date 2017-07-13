@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -7,19 +7,15 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-  constructor(public afAuth: AngularFireAuth) { }
+  constructor(private _afAuth: AngularFireAuth,
+              private _router: Router) { }
 
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    console.log('ActivatedRouteSnapshot: ', route);
-    console.log('RouterStateSnapshot: ', state);
-    return this.afAuth.authState.map((user: firebase.User) => {
-      const authState: boolean = !!user;
-
-      if (authState) {
-
+    return this._afAuth.authState.map((user: firebase.User) => {
+      if (!user) {
+        this._router.navigate(['sign-in']);
       }
-
-      return authState;
+      return true;
     });
   }
 }

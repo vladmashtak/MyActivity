@@ -7,9 +7,10 @@
     </button>
     <a class="navbar-brand mb-0" [routerLink]="'/main'">My Activity</a>
     <div class="collapse navbar-collapse">
-      <div class="navbar-nav mr-auto">
-        <a class="nav-item nav-link" *ngIf="!authentication.isLogin" [routerLink]="'/sign-in'" routerLinkActive>Sign In</a>
-        <a class="nav-item nav-link" *ngIf="authentication.isLogin" (click)="authentication.logout()">Sign Out</a>
+      <div class="navbar-nav mr-auto" *ngIf="authentication.isLogin">
+        <a class="nav-item nav-link" (click)="authentication.logout()">Main</a>
+        <a class="nav-item nav-link" (click)="authentication.logout()">Users</a>
+        <a class="nav-item nav-link" (click)="authentication.logout()">Sign Out</a>
       </div>
       <span class="navbar-text" *ngIf="authentication.currentUser">
         {{authentication.currentUser.displayName}}

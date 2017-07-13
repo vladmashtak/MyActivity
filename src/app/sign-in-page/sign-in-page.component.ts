@@ -19,9 +19,7 @@ export class SignInPageComponent {
   public formSignIn(): void {
     if (this.signInForm.valid) {
       const {email, password} = this.signInForm.value;
-      this.authentication.signInWithEmailAndPassword(email, password)
-        .then(_ => this.signInForm.reset())
-        .catch((error) => console.error(error));
+      this.authentication.signInWithEmailAndPassword(email, password);
     }
   }
 
